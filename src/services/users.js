@@ -1,8 +1,6 @@
-import defaultValues from '../utils/defaultValues';
-
 // FUNÇÃO CRIADA PARA CHECAR SE USUÁRIO ESTÁ SALVO (JÁ TRATADO CASO NÃO HAJA A CHAVE NO STORAGE)
 export function isUserStorageKey(userId, key) {
-  return localStorage[key] ? JSON.parse(localStorage[key]).includes(userId) : defaultValues[key];
+  return localStorage[key] ? JSON.parse(localStorage[key]).includes(userId) : false;
 }
 
 // FUNÇÃO CRIADA PARA ADICIONAR/REMOVER USUÁRIO DA LISTA DE SALVOS
