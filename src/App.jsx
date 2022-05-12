@@ -7,8 +7,16 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <h1 style={{ textAlign: 'center' }}>Tree Items</h1>
-        <section className="application-container">
+        <h1
+          style={{ textAlign: 'center' }}
+          data-testid="page-title"
+        >
+          Tree Items
+        </h1>
+        <section
+          className="application-container"
+          data-testid="application-section"
+        >
           {Object.values(data).map((item) => (
             <TreeItems
               key={item.id}

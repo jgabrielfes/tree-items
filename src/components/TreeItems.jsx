@@ -71,15 +71,18 @@ class TreeItems extends React.Component {
       // SEÇÃO CRIADA PARA SEMÂNTICA DO HTML E ESTILIZAÇÃO
       <section
         className={`tree-container${hidden ? ' hidden' : (!btnCondition ? ' no-have-btn' : '')}`}
+        data-testid="user-section"
       >
         {/* DIV CRIADA PARA ALINHAMENTO COM O BOTÃO */}
         <div>
           {btnCondition && (
             <button
               onClick={this.handleHidden}
+              data-testid="hidden-btn"
             >
               <MdOutlineArrowForwardIos
                 className={`hidden-btn${hidden ? ' rotate' : ''}`}
+                data-testid={hidden ? 'hidden-icon' : undefined}
               />
             </button>
           )}
@@ -89,6 +92,7 @@ class TreeItems extends React.Component {
               type="checkbox"
               defaultChecked={isUserStorageKey(id, 'savedUsers')}
               onChange={this.handleInput}
+              data-testid="data-checkbox"
             />
             <span className="tree-item-name">{name}</span>
           </label>
