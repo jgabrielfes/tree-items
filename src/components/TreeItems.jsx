@@ -26,7 +26,6 @@ class TreeItems extends React.Component {
     const parents = getAllParents(target);
     const isChecked = target.indeterminate ? true : target.checked;
     setUserStorageKey(id, false, 'indeterminateUsers');
-    // setSavedUser(id, isChecked);
     setUserStorageKey(id, isChecked, 'savedUsers');
 
     // MARCAÇÃO DOS FILHOS
@@ -35,7 +34,6 @@ class TreeItems extends React.Component {
       input.indeterminate = false;
       setUserStorageKey(input.id, false, 'indeterminateUsers');
       input.checked = isChecked;
-      // setSavedUser(input.id, isChecked);
       setUserStorageKey(input.id, isChecked, 'savedUsers');
     });
 
