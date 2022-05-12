@@ -1,0 +1,104 @@
+.tree-container {
+  background-color: white;
+  color: #000080;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden;
+  padding-left: 26px;
+  position: relative;
+  transition-duration: 200ms;
+}
+
+.tree-container span {
+  font-size: 1.2em;
+}
+
+.tree-container:hover {
+  background-color: #b4b4ff;
+}
+
+.tree-container.hidden {
+  height: 26px;
+}
+
+.tree-container::before {
+  background-color: black;
+  bottom: 0;
+  content: '';
+  left: 14px;
+  position: absolute;
+  top: 0;
+  width: 1px;
+}
+
+.tree-container:first-child::before {
+  top: 13px;
+}
+
+.tree-container:last-of-type::before {
+  bottom: 13px;
+}
+
+.tree-container::after {
+  background-color: black;
+  content: '';
+  height: 1px;
+  left: 14px;
+  pointer-events: none;
+  position: absolute;
+  right: calc(100% - 25px);
+  top: 13px;
+}
+
+.tree-container.no-have-btn::after {
+  right: calc(100% - 20px - 0.9em);
+}
+
+.tree-container > :first-child {
+  display: flex;
+}
+
+.tree-container > :first-child > label {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex: 1;
+  gap: 1px;
+  transition-duration: 200ms;
+  white-space: nowrap;
+}
+
+.tree-container.no-have-btn > :first-child > label {
+  padding-left: 0.9em;
+}
+
+.tree-container:nth-of-type(2n + 1) > :first-child > label {
+  background-color: #dcdcfa;
+}
+
+.tree-container:nth-of-type(2n) > :first-child > label {
+  background-color: #f1f1ff;
+}
+
+.tree-container:hover > :first-child > label {
+  background-color: #b4b4ff;
+}
+
+.tree-container > :first-child > button {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.hidden-btn {
+  transition-duration: 200ms;
+}
+
+.hidden-btn.rotate {
+  transform: rotate(90deg);
+}

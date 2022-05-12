@@ -1,0 +1,9 @@
+.application-container {
+  border: 1px solid black;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+  height: calc(90vh - 7.336em);
+  margin: 0 auto;
+  overflow: auto;
+  padding: 15px;
+  width: 80%;
+}
