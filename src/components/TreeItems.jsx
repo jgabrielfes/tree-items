@@ -2,11 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import { getAllChildrens, getAllParents } from '../services/inputs';
-import {
-  isSavedUser, setSavedUser,
-  isIndeterminateUser, setIndeterminateUser,
-  isHiddenUser, setHiddenUser,
-} from '../services/users';
+import { isUserStorageKey, setUserStorageKey } from '../services/users';
 import '../styles/TreeItems.css';
 
 class TreeItems extends React.Component {
@@ -16,29 +12,31 @@ class TreeItems extends React.Component {
     this.handleHidden = this.handleHidden.bind(this);
 
     this.state = {
-      hidden: isHiddenUser(props.id),
+      hidden: isUserStorageKey(props.id, 'hiddenUsers'),
     };
   }
 
   componentDidMount() {
     const { id } = this.props;
-    if (isIndeterminateUser(id)) document.getElementById(id).indeterminate = true;
+    if (isUserStorageKey(id, 'indeterminateUsers')) document.getElementById(id).indeterminate = true;
   }
 
   handleInput({ target }) {
     const { id, children } = this.props;
     const parents = getAllParents(target);
     const isChecked = target.indeterminate ? true : target.checked;
-    setIndeterminateUser(id, false);
-    setSavedUser(id, isChecked);
+    setUserStorageKey(id, false, 'indeterminateUsers');
+    // setSavedUser(id, isChecked);
+    setUserStorageKey(id, isChecked, 'savedUsers');
 
     // MARCAÇÃO DOS FILHOS
     const childrenInputs = JSON.stringify(children) === '{}' ? [] : getAllChildrens(target);
     childrenInputs.forEach((input) => {
       input.indeterminate = false;
-      setIndeterminateUser(input.id, false);
+      setUserStorageKey(input.id, false, 'indeterminateUsers');
       input.checked = isChecked;
-      setSavedUser(input.id, isChecked);
+      // setSavedUser(input.id, isChecked);
+      setUserStorageKey(input.id, isChecked, 'savedUsers');
     });
 
     // MARCAÇÃO DOS PAIS (CASO TODOS ESTEJAM SELECIONADOS OU CASO ALGUM ESTEJA SELECIONADO)
@@ -52,9 +50,9 @@ class TreeItems extends React.Component {
       };
 
       parent.indeterminate = values[every].indeterminate;
-      setIndeterminateUser(parent.id, values[every].indeterminate);
+      setUserStorageKey(parent.id, values[every].indeterminate, 'indeterminateUsers');
       parent.checked = values[every].checked;
-      setSavedUser(parent.id, values[every].checked);
+      setUserStorageKey(parent.id, values[every].checked, 'savedUsers');
     })
   }
 
@@ -62,7 +60,7 @@ class TreeItems extends React.Component {
     const { id } = this.props;
     const { hidden } = this.state;
 
-    setHiddenUser(id, !hidden);
+    setUserStorageKey(id, !hidden, 'hiddenUsers');
     this.setState({ hidden: !hidden });
   }
 
@@ -91,7 +89,7 @@ class TreeItems extends React.Component {
             <input
               id={id}
               type="checkbox"
-              defaultChecked={isSavedUser(id)}
+              defaultChecked={isUserStorageKey(id, 'savedUsers')}
               onChange={this.handleInput}
             />
             <span className="tree-item-name">{name}</span>
