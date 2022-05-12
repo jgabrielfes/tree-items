@@ -34,7 +34,7 @@ describe('2 - Teste as funções da página', () => {
     });
   });
 
-  test.only('Se ao selecionar todos os checkbox filhos o pai será marcado como checked.', () => {
+  test('Se ao selecionar todos os checkbox filhos o pai será marcado como checked.', () => {
     render(<App />);
     const checkbox = screen.getAllByTestId('data-checkbox');
     const randomIndex = Math.floor(Math.random() * checkbox.length);
