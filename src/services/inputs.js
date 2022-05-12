@@ -1,5 +1,5 @@
 // FUNÇÃO CRIADA PARA SELECIONAR TODOS OS FILHOS DO ALVO
-export function getAllTargetInputs(target) {
+export function getAllChildrens(target) {
   return [...target.parentElement.parentElement.parentElement.querySelectorAll('input')]
     .filter(({ id }) => id !== target.id);
 }

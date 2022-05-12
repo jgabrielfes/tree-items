@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
-import { getAllTargetInputs, getAllParents } from '../services/inputs';
+import { getAllChildrens, getAllParents } from '../services/inputs';
 import {
   isSavedUser, setSavedUser,
   isIndeterminateUser, setIndeterminateUser,
@@ -33,7 +33,7 @@ class TreeItems extends React.Component {
     setSavedUser(id, isChecked);
 
     // MARCAÇÃO DOS FILHOS
-    const childrenInputs = JSON.stringify(children) === '{}' ? [] : getAllTargetInputs(target);
+    const childrenInputs = JSON.stringify(children) === '{}' ? [] : getAllChildrens(target);
     childrenInputs.forEach((input) => {
       input.indeterminate = false;
       setIndeterminateUser(input.id, false);
@@ -43,8 +43,8 @@ class TreeItems extends React.Component {
 
     // MARCAÇÃO DOS PAIS (CASO TODOS ESTEJAM SELECIONADOS OU CASO ALGUM ESTEJA SELECIONADO)
     parents.forEach((parent) => {
-      const some = getAllTargetInputs(parent).some(({ checked }) => checked);
-      const every = getAllTargetInputs(parent).every(({ checked }) => checked);
+      const some = getAllChildrens(parent).some(({ checked }) => checked);
+      const every = getAllChildrens(parent).every(({ checked }) => checked);
 
       const values = {
         true: { indeterminate: false, checked: true },
