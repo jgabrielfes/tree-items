@@ -34,6 +34,19 @@ describe('2 - Teste as funções da página', () => {
     });
   });
 
+  test.only('Se ao selecionar todos os checkbox filhos o pai será marcado como checked.', () => {
+    render(<App />);
+    const checkbox = screen.getAllByTestId('data-checkbox');
+    const randomIndex = Math.floor(Math.random() * checkbox.length);
+
+    getAllChildrens(checkbox[randomIndex]).forEach((input) => {
+      if (getAllParents(input)[0] === checkbox[randomIndex]) fireEvent.click(input);
+    });
+
+    expect(checkbox[randomIndex].checked)
+      .toBe(getAllChildrens(checkbox[randomIndex]).length > 0);
+  });
+
   test('O botão hidden.', () => {
     render(<App />);
     const hiddenBtn = screen.getAllByTestId('hidden-btn');
