@@ -10,10 +10,6 @@
   transition-duration: 200ms;
 }
 
-.tree-container span {
-  font-size: 1.2em;
-}
-
 .tree-container:hover {
   background-color: #b4b4ff;
 }
@@ -53,6 +49,10 @@
 
 .tree-container.no-have-btn::after {
   right: calc(100% - 20px - 0.9em);
+}
+
+.tree-item-name {
+  font-size: 1.2em;
 }
 
 .tree-container > :first-child {
